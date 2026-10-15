@@ -1,0 +1,24 @@
+<mat-toolbar class="toolbar" aria-label="Primary navigation">
+  <a class="brand" routerLink="/home" aria-label="GWO Water Monitoring Platform home">
+    <img class="brand-logo" src="gwo-logo.svg" alt="Global Water Observatory logo" />
+    <span class="brand-title">{{ 'app.title' | translate }}</span>
+  </a>
+
+  <nav class="navigation" aria-label="Main pages">
+    <a mat-button routerLink="/home" routerLinkActive="active-link">
+      {{ 'navigation.home' | translate }}
+    </a>
+    <a mat-button routerLink="/water-quality/new" routerLinkActive="active-link">
+      {{ 'navigation.new-record' | translate }}
+    </a>
+  </nav>
+
+  <mat-button-toggle-group
+    class="language-selector"
+    [value]="currentLanguage()"
+    (change)="selectLanguage($event.value)"
+    aria-label="Interface language">
+    <mat-button-toggle value="en" aria-label="English">EN</mat-button-toggle>
+    <mat-button-toggle value="es" aria-label="Español">ES</mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-toolbar>

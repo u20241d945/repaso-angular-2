@@ -1,0 +1,60 @@
+{
+  "app": {
+    "title": "Plataforma de Monitoreo de Agua GWO"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "new-record": "Nuevo Registro de Calidad"
+  },
+  "home": {
+    "title": "Inicio",
+    "introduction": "Monitoreo Internacional del Agua.",
+    "my-records": "Mis Registros de Calidad del Agua",
+    "add-record": "Registrar nuevo",
+    "load-error": "No se pudieron cargar los registros. Inicia la API local e inténtalo nuevamente."
+  },
+  "water-quality": {
+    "water-type": "Tipo de Agua",
+    "consumption-level": "Nivel de Consumo",
+    "quality-index": "Índice de Calidad",
+    "year": "Año"
+  },
+  "water-type": {
+    "river": "Río",
+    "lake": "Lago",
+    "groundwater": "Agua subterránea",
+    "rainwater": "Agua de lluvia",
+    "glacier": "Glaciar",
+    "desalination": "Desalinización"
+  },
+  "new-record": {
+    "title": "Nuevo Registro de Calidad del Agua",
+    "subtitle": "Registrar Indicadores Internacionales del Agua",
+    "water-type": "Tipo de agua",
+    "associated-region": "Región hídrica asociada",
+    "regional-operator": "Operador regional",
+    "automatic-data": "Indicadores automáticos",
+    "loading-operators": "Cargando operadores regionales...",
+    "operator-error": "No se pudieron cargar los operadores desde DummyJSON.",
+    "select-type-hint": "Selecciona un tipo de agua para cargar sus indicadores.",
+    "create-success": "Registro de calidad creado.",
+    "create-error": "No se pudo crear el registro."
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "quality-rule": "El Índice de Calidad debe ser mayor que cero y mayor o igual al Nivel de Consumo."
+  },
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "message": "No se encontró la ruta solicitada {{path}}.",
+    "back-home": "Volver al Inicio"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "empty": "Vacío",
+    "create": "Crear",
+    "cancel": "Cancelar",
+    "saving": "Guardando...",
+    "select-water-type": "Selecciona un tipo de agua"
+  }
+}

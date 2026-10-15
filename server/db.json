@@ -1,0 +1,102 @@
+{
+  "water-monitoring-stations": [
+    {
+      "id": 1,
+      "name": "Amazon River Station",
+      "waterType": "river"
+    },
+    {
+      "id": 2,
+      "name": "Great Lakes Station",
+      "waterType": "lake"
+    },
+    {
+      "id": 3,
+      "name": "Arabian Aquifer Station",
+      "waterType": "groundwater"
+    },
+    {
+      "id": 4,
+      "name": "Monsoon Collection Station",
+      "waterType": "rainwater"
+    },
+    {
+      "id": 5,
+      "name": "Alpine Glacier Station",
+      "waterType": "glacier"
+    },
+    {
+      "id": 6,
+      "name": "Coastal Desalination Station",
+      "waterType": "desalination"
+    }
+  ],
+  "water-quality-items": [
+    {
+      "id": 1,
+      "stationId": 1,
+      "waterType": "river",
+      "regionCode": "US-MS",
+      "regionName": "United States",
+      "consumptionLevel": 68,
+      "qualityIndex": 82,
+      "year": 2026,
+      "registeredAt": "2026-04-14T14:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "stationId": 2,
+      "waterType": "lake",
+      "regionCode": "US-WI",
+      "regionName": "United States",
+      "consumptionLevel": 55,
+      "qualityIndex": 91,
+      "year": 2026,
+      "registeredAt": "2026-04-20T10:15:00.000Z"
+    },
+    {
+      "id": 3,
+      "stationId": 3,
+      "waterType": "groundwater",
+      "regionCode": "US-AZ",
+      "regionName": "United States",
+      "consumptionLevel": 70,
+      "qualityIndex": 76,
+      "year": 2026,
+      "registeredAt": "2026-04-29T16:45:00.000Z"
+    },
+    {
+      "id": 4,
+      "stationId": 4,
+      "waterType": "rainwater",
+      "regionCode": "US-WA",
+      "regionName": "United States",
+      "consumptionLevel": 40,
+      "qualityIndex": 88,
+      "year": 2026,
+      "registeredAt": "2026-05-02T08:20:00.000Z"
+    },
+    {
+      "id": 5,
+      "stationId": 5,
+      "waterType": "glacier",
+      "regionCode": "US-AK",
+      "regionName": "United States",
+      "consumptionLevel": 22,
+      "qualityIndex": 95,
+      "year": 2026,
+      "registeredAt": "2026-05-08T12:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "stationId": 6,
+      "waterType": "desalination",
+      "regionCode": "US-CA",
+      "regionName": "United States",
+      "consumptionLevel": 65,
+      "qualityIndex": 79,
+      "year": 2026,
+      "registeredAt": "2026-05-12T09:40:00.000Z"
+    }
+  ]
+}

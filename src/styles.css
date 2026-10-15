@@ -1,0 +1,22 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 90% 0, rgba(153, 233, 242, 0.25), transparent 32rem),
+    #f5fafb;
+  color: #12323b;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a {
+  font: inherit;
+}

@@ -1,0 +1,34 @@
+<section class="hero" aria-labelledby="home-title">
+  <div>
+    <p class="eyebrow">Global Water Observatory</p>
+    <h1 id="home-title">{{ 'home.title' | translate }}</h1>
+    <p class="lead">{{ 'home.introduction' | translate }}</p>
+  </div>
+  <a mat-flat-button routerLink="/water-quality/new">
+    {{ 'home.add-record' | translate }}
+  </a>
+</section>
+
+<section class="records" aria-labelledby="records-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">GWO Data Network</p>
+      <h2 id="records-title">{{ 'home.my-records' | translate }}</h2>
+    </div>
+    <span class="record-count" aria-label="Record count">{{ store.items().length }}</span>
+  </div>
+
+  @if (store.loading()) {
+    <p class="state-message" role="status">{{ 'common.loading' | translate }}</p>
+  } @else if (store.hasError()) {
+    <p class="state-message error" role="alert">{{ 'home.load-error' | translate }}</p>
+  } @else if (store.items().length === 0) {
+    <p class="state-message">{{ 'common.empty' | translate }}</p>
+  } @else {
+    <div class="records-grid" aria-label="Water quality records">
+      @for (item of store.items(); track item.id) {
+        <app-water-quality-summary [item]="item" />
+      }
+    </div>
+  }
+</section>

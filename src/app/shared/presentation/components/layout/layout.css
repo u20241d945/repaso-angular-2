@@ -1,0 +1,9 @@
+:host,
+.app-shell {
+  display: block;
+  min-height: 100vh;
+}
+
+.route-content {
+  min-height: calc(100vh - 76px);
+}

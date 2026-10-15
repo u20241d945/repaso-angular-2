@@ -1,0 +1,91 @@
+<section class="form-page" aria-labelledby="new-record-title">
+  <header class="page-heading">
+    <p class="eyebrow">GWO Data Network</p>
+    <h1 id="new-record-title">{{ 'new-record.title' | translate }}</h1>
+    <p>{{ 'new-record.subtitle' | translate }}</p>
+  </header>
+
+  <mat-card class="form-card" appearance="outlined">
+    <form [formGroup]="form" (ngSubmit)="create()" aria-label="New water quality record form">
+      <div class="field-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'new-record.water-type' | translate }}</mat-label>
+          <mat-select formControlName="waterType" aria-label="Water type">
+            @for (waterType of waterTypes; track waterType) {
+              <mat-option [value]="waterType">{{ ('water-type.' + waterType) | translate }}</mat-option>
+            }
+          </mat-select>
+          @if (isInvalidControl(form, 'waterType')) {
+            <mat-error>{{ 'validation.required' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="region-preview" aria-live="polite">
+          <span>{{ 'new-record.associated-region' | translate }}</span>
+          <strong>{{ associatedRegion() || ('common.select-water-type' | translate) }}</strong>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="operator-field">
+        <mat-label>{{ 'new-record.regional-operator' | translate }}</mat-label>
+        <mat-select formControlName="operatorId" aria-label="Regional operator">
+          @for (operator of operatorStore.operators(); track operator.id) {
+            <mat-option [value]="operator.id">
+              {{ operator.fullName }} - {{ operator.regionCode }} - {{ operator.regionName }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (isInvalidControl(form, 'operatorId')) {
+          <mat-error>{{ 'validation.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      @if (operatorStore.loading()) {
+        <p class="inline-status" role="status">{{ 'new-record.loading-operators' | translate }}</p>
+      } @else if (operatorStore.hasError()) {
+        <p class="inline-status error" role="alert">{{ 'new-record.operator-error' | translate }}</p>
+      }
+
+      <section class="automatic-data" aria-labelledby="automatic-data-title">
+        <div>
+          <p class="eyebrow">API + Fake API</p>
+          <h2 id="automatic-data-title">{{ 'new-record.automatic-data' | translate }}</h2>
+        </div>
+
+        @if (loadingIndicators()) {
+          <p class="inline-status" role="status">{{ 'common.loading' | translate }}</p>
+        } @else if (indicators(); as automatic) {
+          <dl class="automatic-grid">
+            <div>
+              <dt>{{ 'water-quality.consumption-level' | translate }}</dt>
+              <dd>{{ automatic.consumptionLevel }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'water-quality.quality-index' | translate }}</dt>
+              <dd>{{ automatic.qualityIndex }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'water-quality.year' | translate }}</dt>
+              <dd>{{ automatic.year }}</dd>
+            </div>
+          </dl>
+
+          @if (!validIndicators()) {
+            <p class="inline-status error" role="alert">{{ 'validation.quality-rule' | translate }}</p>
+          }
+        } @else {
+          <p class="inline-status">{{ 'new-record.select-type-hint' | translate }}</p>
+        }
+      </section>
+
+      <div class="actions">
+        <button mat-button type="button" (click)="cancel()">
+          {{ 'common.cancel' | translate }}
+        </button>
+        <button mat-flat-button type="submit" [disabled]="!canCreate()">
+          {{ saving() ? ('common.saving' | translate) : ('common.create' | translate) }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</section>

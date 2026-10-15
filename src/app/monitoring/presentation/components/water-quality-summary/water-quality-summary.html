@@ -1,0 +1,28 @@
+<mat-card class="quality-card" appearance="outlined">
+  <mat-card-header>
+    <div class="region-code" aria-label="Region code">{{ item().regionCode }}</div>
+    <mat-card-title>{{ item().regionName }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <dl class="metrics">
+      <div>
+        <dt>{{ 'water-quality.water-type' | translate }}</dt>
+        <dd>{{ ('water-type.' + item().waterType) | translate }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'water-quality.consumption-level' | translate }}</dt>
+        <dd>{{ item().consumptionLevel }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'water-quality.quality-index' | translate }}</dt>
+        <dd>{{ item().qualityIndex }}</dd>
+      </div>
+    </dl>
+  </mat-card-content>
+
+  <mat-card-footer class="card-footer">
+    <span>{{ item().year }}</span>
+    <span>{{ item().registeredAt | date: 'medium' }}</span>
+  </mat-card-footer>
+</mat-card>

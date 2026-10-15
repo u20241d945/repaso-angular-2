@@ -1,0 +1,60 @@
+{
+  "app": {
+    "title": "GWO Water Monitoring Platform"
+  },
+  "navigation": {
+    "home": "Home",
+    "new-record": "New Water Quality Record"
+  },
+  "home": {
+    "title": "Home",
+    "introduction": "International Water Monitoring.",
+    "my-records": "My Water Quality Records",
+    "add-record": "Register new record",
+    "load-error": "Water quality records could not be loaded. Start the local API and try again."
+  },
+  "water-quality": {
+    "water-type": "Water Type",
+    "consumption-level": "Consumption Level",
+    "quality-index": "Quality Index",
+    "year": "Year"
+  },
+  "water-type": {
+    "river": "River",
+    "lake": "Lake",
+    "groundwater": "Groundwater",
+    "rainwater": "Rainwater",
+    "glacier": "Glacier",
+    "desalination": "Desalination"
+  },
+  "new-record": {
+    "title": "New Water Quality Record",
+    "subtitle": "Register International Water Indicators",
+    "water-type": "Water type",
+    "associated-region": "Associated water region",
+    "regional-operator": "Regional operator",
+    "automatic-data": "Automatic indicators",
+    "loading-operators": "Loading regional operators...",
+    "operator-error": "Regional operators could not be loaded from DummyJSON.",
+    "select-type-hint": "Select a water type to load its indicators.",
+    "create-success": "Water quality record created.",
+    "create-error": "The record could not be created."
+  },
+  "validation": {
+    "required": "This field is required.",
+    "quality-rule": "Quality Index must be greater than zero and greater than or equal to Consumption Level."
+  },
+  "page-not-found": {
+    "title": "Page not found",
+    "message": "The requested route {{path}} was not found.",
+    "back-home": "Return to Home"
+  },
+  "common": {
+    "loading": "Loading...",
+    "empty": "Empty",
+    "create": "Create",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "select-water-type": "Select a water type"
+  }
+}
