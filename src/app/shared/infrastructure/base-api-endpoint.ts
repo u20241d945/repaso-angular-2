@@ -48,6 +48,22 @@ export abstract class BaseApiEndpoint<
     );
   }
 
+  /** Replaces an existing resource and maps the API response. */
+  update(entity: TEntity, id: number): Observable<TEntity> {
+    const resource = this.assembler.toResourceFromEntity(entity);
+    return this.http.put<TResource>(`${this.endpointUrl}/${id}`, resource).pipe(
+      map(updated => this.assembler.toEntityFromResource(updated)),
+      catchError(this.handleError('Failed to update entity'))
+    );
+  }
+
+  /** Deletes a resource by identifier. */
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.endpointUrl}/${id}`).pipe(
+      catchError(this.handleError('Failed to delete entity'))
+    );
+  }
+
   /** Translates HTTP failures into application-friendly errors. */
   protected handleError(operation: string) {
     return (error: HttpErrorResponse): Observable<never> => {

@@ -1,113 +1,138 @@
 # GWO Water Monitoring Platform
 
-GWO Water Monitoring Platform is an Angular application for reviewing and registering international water quality indicators. It combines a local REST API for monitoring data with DummyJSON regional operators.
+Simple Angular reference project for displaying and registering international water-quality
+records. It follows the layered and bounded-context conventions used in the course while
+keeping each responsibility small and easy to locate.
 
 ## Author
 
 - Student code: `u20241d945`
 - Full name: replace this line before submission
 
-## Features
+## Quick start
 
-- Responsive Home view with a two-column water quality card grid.
-- New Water Quality Record form with automatic station and indicator selection.
-- Regional operators retrieved from DummyJSON.
-- Validation of the water quality business rule.
-- English and Spanish interface with English as the default language.
-- Semantic lazy-loaded routes and a page-not-found view.
-- Signal-based state management.
-- Domain-driven, layered, and component-based organization.
-- Shared base contracts for entities, assemblers, API facades, and REST endpoints.
-- Encapsulated domain entities using native private fields and public getters.
-
-## Stack
-
-- Angular 21.2 standalone components
-- Angular Material 21.2
-- Angular Router and HttpClient
-- Angular Signals and Reactive Forms
-- ngx-translate 18
-- json-server 0.17.4
-- DummyJSON API
-
-## Installation
-
-Install dependencies from the project folder:
+From the project folder, run:
 
 ```bash
 npm install
-```
-
-## Running the application
-
-Start Angular and json-server in one terminal:
-
-```bash
 npm run dev
 ```
 
-The application is available at `http://localhost:4200/` and redirects to `/home`.
+Open `http://localhost:4200`. The `dev` command starts Angular and `json-server` together.
+Press `Ctrl+C` to stop both processes.
 
-The local endpoints are:
+## What the application does
+
+- Shows existing water-quality records on `/home`.
+- Creates a record on `/water-quality/new`.
+- Reads monitoring data from the local fake API.
+- Reads regional operators from DummyJSON.
+- Supports English and Spanish.
+- Shows a page-not-found view for unsupported routes.
+
+## The architecture in one line
+
+```text
+View -> Store -> API Service -> Endpoint -> HTTP API
+                                    |
+Entity <- Assembler <- Resource/Response
+```
+
+Each piece answers one question:
+
+| Piece | Responsibility |
+|---|---|
+| View or component | What does the user see and do? |
+| Store | What state does the screen need? |
+| API service | What operations does this bounded context offer? |
+| Endpoint | Which URL and HTTP method are used? |
+| Resource/Response/Request | What shape does the API JSON have? |
+| Assembler | How is API JSON converted into a domain entity? |
+| Entity | What data and business rules belong to the domain? |
+
+## Project structure
+
+```text
+src/app/
+├── monitoring/                 # Main business bounded context
+│   ├── domain/                 # Water entities and rules
+│   ├── application/            # Signal-based state stores
+│   ├── infrastructure/         # API, endpoints, DTOs and assemblers
+│   └── presentation/           # Home, form and summary component
+├── water/                      # Regional operators and region rules
+│   ├── domain/
+│   ├── application/
+│   └── infrastructure/
+└── shared/                     # Generic code reusable in another project
+    ├── domain/
+    ├── infrastructure/
+    └── presentation/
+```
+
+## Reusable building blocks
+
+The following files are intentionally generic and can be copied without changing their
+implementation:
+
+- `BaseEntity`: requires a numeric entity identifier.
+- `BaseAssembler`: defines entity/resource conversion methods.
+- `BaseApiEndpoint`: provides `getAll`, `getById`, `create`, `update`, and `delete`.
+- `BaseApi`: base type for an API facade that composes endpoints.
+- `BaseForm`: contains reusable reactive-form validation helpers.
+- `Layout`: provides the application shell and router outlet.
+
+See [`docs/REUSE-GUIDE.md`](docs/REUSE-GUIDE.md) for a practical guide covering project
+initialization, Angular CLI commands, and adaptation to another evaluation.
+
+## How to add another bounded context
+
+For a new feature such as `products`, create these folders:
+
+```text
+products/
+├── domain/model/product.entity.ts
+├── application/stores/product.store.ts
+├── infrastructure/
+│   ├── assemblers/product.assembler.ts
+│   ├── endpoints/products-api.endpoint.ts
+│   ├── resources/product.resource.ts
+│   ├── responses/products.response.ts
+│   └── services/product-api.service.ts
+└── presentation/views/product-list/
+```
+
+Then follow this order:
+
+1. Define the entity.
+2. Define the API resource or request.
+3. Create the assembler.
+4. Create an endpoint extending `BaseApiEndpoint`.
+5. Expose the endpoint through an API service extending `BaseApi`.
+6. Use that service from a Signal store and consume the store from the view.
+
+## API configuration
+
+Environment values are located in:
+
+- `src/environments/environment.ts`
+- `src/environments/environment.development.ts`
+
+Local data is stored in `server/db.json` and exposed at:
 
 - `http://localhost:3000/water-monitoring-stations`
 - `http://localhost:3000/water-quality-items`
 
-Press `Ctrl+C` to stop both processes.
+Regional operators are loaded from `https://dummyjson.com/users?limit=100`.
 
-### Running each service separately
+## Available commands
 
-Terminal 1:
-
-```bash
-npm run api
-```
-
-Terminal 2:
-
-```bash
-npm start
-```
-
-## Routes
-
-- `/home`: Home and water quality record summaries.
-- `/water-quality/new`: New Water Quality Record form.
-- Any unsupported route: page-not-found view.
-
-## API configuration
-
-API URLs and endpoint paths are defined in `src/environments/environment.ts` and
-`src/environments/environment.development.ts`. The local database is located at `server/db.json`.
-
-The new-record form only requests the water type and regional operator. The station, consumption level, quality index, year, record identifier, and registration timestamp are obtained or generated automatically.
-
-## Architecture
-
-The code follows the same bounded-context and layered conventions used in the course reference project:
-
-- `monitoring`: water stations, quality records, registration use case, and local API access.
-- `water`: regional operators obtained from DummyJSON and water-region rules.
-- `shared`: reusable domain contracts, REST infrastructure, layout, toolbar, and error views.
-
-Each business bounded context separates `domain`, `application`, `infrastructure`, and
-`presentation`. API services extend `BaseApi` and compose endpoint objects. Endpoints use
-typed resources, response envelopes, and assemblers; application stores expose readonly
-Angular Signals to the presentation layer.
-
-## Build
-
-```bash
-npm run build
-```
-
-The production files are created in `dist/ea17952u20241d945/`.
-
-## Tests
-
-```bash
-npm test -- --watch=false --browsers=ChromeHeadless
-```
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Starts Angular and the local API in one terminal. |
+| `npm start` | Starts only Angular. |
+| `npm run api` | Starts only `json-server`. |
+| `npm run build` | Creates the production build. |
+| `npm test -- --watch=false --browsers=ChromeHeadless` | Runs the unit tests once. |
 
 ## Creating the project from an empty folder
 
@@ -121,7 +146,8 @@ npm install --save-dev concurrently
 
 ## Submission checklist
 
-1. Replace the author placeholder with the developer's full name.
-2. Run the build and tests.
-3. Remove `node_modules` before packaging.
-4. Name the ZIP file `ea17952u20241d945.zip`.
+1. Replace the full-name placeholder.
+2. Confirm the API URLs and requested field names.
+3. Run the build and tests.
+4. Remove `node_modules` before creating the ZIP.
+5. Name the ZIP file `ea17952u20241d945.zip`.
