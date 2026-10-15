@@ -82,7 +82,7 @@ version can be different.
 | "Support two languages" | ngx-translate. |
 | "The component is unknown" | Verify the Material import in the standalone component. |
 
-## 6. Simple exam workflow
+## 6. Workflow
 
 1. Read the statement and underline entities, properties, routes, API URLs, and business rules.
 2. Use [REUSE-GUIDE.md](REUSE-GUIDE.md) to identify what must change.
@@ -90,5 +90,4 @@ version can be different.
 4. Copy the smallest relevant example and adapt its names and data types.
 5. Run `npm run build` regularly so errors stay small and easy to locate.
 
-Do not copy a complete example blindly. Check its Angular version, required imports, JSON property
-names, and whether it uses standalone components.
+

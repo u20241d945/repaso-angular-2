@@ -84,7 +84,7 @@ implementation:
 See [`docs/REUSE-GUIDE.md`](docs/REUSE-GUIDE.md) for a practical guide covering project
 initialization, Angular CLI commands, and adaptation to another evaluation.
 
-See [`docs/EXAM-REFERENCE-LINKS.md`](docs/EXAM-REFERENCE-LINKS.md) for a task-based list of
+See [`docs/REFERENCE-LINKS.md`](docs/REFERENCE-LINKS.md) for a task-based list of
 official Angular, Angular Material, and supporting-library documentation to consult during the
 evaluation.
 
